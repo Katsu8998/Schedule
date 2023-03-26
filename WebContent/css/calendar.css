@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #0e171c;
+    display: grid;
+    font: 300 100%/1.5em 'Lato', sans-serif;
+    min-height: 100vh;
+    place-items: center;
+}
+
+h2 {
+    font-size: 2em;
+    line-height: 1.25em;
+    margin: .33em 0;
+    text-transform: uppercase;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.container {
+    width: 510px;
+}
+
+.calendar {
+    text-align: center;
+}
+
+.calendar header {
+    position: relative;
+}
+
+tr {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+tbody {
+    color: #7c8a95;
+}
+
+tbody th:hover {
+    border: 2px solid #00addf;
+}
+
+th {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    display: inline-block;
+    height: 4em;
+    line-height: 4em;
+    text-align: center;
+    width: 4em;
+}
+
+a {
+    text-decoration: none;
+    color: #665df5;
+    font-weight: 400;
+    border-bottom: 1px solid #665df5;
+    cursor: pointer;
+}
+
+a prev,
+next {
+    font-size: 20px;
+}
+
+
+.btn {
+    border: 1px solid black;
+    width: 70%;
+    height: 40px;
+    margin: auto;
+    display: block;
+    color: #fff;
+    background-color: #4c59a8;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+}
