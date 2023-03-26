@@ -1,4 +1,3 @@
-# Schedule
 # スケジュール管理アプリ
 ## 使用言語
 Java, JSP, HTML, CSS, JS
