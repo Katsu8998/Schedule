@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +25,29 @@ import model.User;
 @WebServlet("/Schedule")
 public class Schedule extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ScheduleDAO dao;
+	private ScheduleLogic SL;
+	private ScheduleBeans s;
+	private ScheduleBeans SD;
+	private User user;
+	private Parameter parameter;
+	private ScheduleLogic logic;
+	private ScheduleBeans SB;
+	private ScheduleBeans Sd;
+
+	public Schedule() {
+		super();
+		this.dao = new ScheduleDAO();
+		this.SL = new ScheduleLogic();
+		this.SD = new ScheduleBeans();
+		this.user = new User();
+		this.parameter = new Parameter();
+		this.logic = new ScheduleLogic();
+		this.SB = new ScheduleBeans();
+		this.Sd = new ScheduleBeans();
+	}
+
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,9 +62,9 @@ public class Schedule extends HttpServlet {
 		String year = request.getParameter("year");
 		String s_id = request.getParameter("s_id");
 
-		ServletContext application = this.getServletContext();
-		ScheduleDAO dao = new ScheduleDAO();
-		ScheduleLogic SL = new ScheduleLogic();
+	//	ServletContext application = this.getServletContext();
+	//	ScheduleDAO dao = new ScheduleDAO();
+	//	ScheduleLogic SL = new ScheduleLogic();
 		HttpSession session = request.getSession();
 
 		/**
@@ -59,13 +81,15 @@ public class Schedule extends HttpServlet {
 			List<ScheduleBeans> SB = dao.findAll();
 			List<ScheduleBeans> SB_T = SL.dayCheck(SB, day, month, year);
 			Collections.sort(SB_T, new MySBComparator());
-			application.setAttribute("SB", SB_T);
+		//	application.setAttribute("SB", SB_T);
+			session.setAttribute("SB", SB_T);
 
 			forwardPath = "/WEB-INF/jsp/view.jsp";
 			break;
 		case "edit":
 			//編集対象のインスタンスを取得し、セッションスコープに保存
-			ScheduleBeans s = SL.selectS(s_id);
+	//		ScheduleBeans s = SL.selectS(s_id);
+			s = SL.selectS(s_id);
 
 			session.setAttribute("SB_e", s);
 			forwardPath = "/WEB-INF/jsp/edit.jsp";
@@ -74,7 +98,8 @@ public class Schedule extends HttpServlet {
 		case "delete":
 			//削除対象のインスタンスを取得し、セッションスコープに保存
 
-			ScheduleBeans SD = SL.selectS(s_id);
+		//	ScheduleBeans SD = SL.selectS(s_id);
+			SD = SL.selectS(s_id);
 
 			session.setAttribute("SB_d", SD);
 			forwardPath = "/WEB-INF/jsp/deleteCheck.jsp";
@@ -89,8 +114,10 @@ public class Schedule extends HttpServlet {
 
 	}
 
-	//ScheduleBeansリストを昇順
+		//ScheduleBeansリストを昇順
 	public class MySBComparator implements Comparator<ScheduleBeans> {
+
+
 		@Override
 		public int compare(ScheduleBeans s1, ScheduleBeans s2) {
 			return s1.getId() < s2.getId() ? -1 : 1;
@@ -105,18 +132,19 @@ public class Schedule extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String input = request.getParameter("action");
 		HttpSession session = request.getSession();
-		ServletContext application = this.getServletContext();
+//		ServletContext application = this.getServletContext();
 
-		User user = (User) session.getAttribute("user");
-		Parameter parameter = new Parameter();
+		 user = (User) session.getAttribute("user");
+//		User user = (User) session.getAttribute("user");
+//		Parameter parameter = new Parameter();
 
-		ScheduleDAO dao = new ScheduleDAO();
-		ScheduleLogic logic = new ScheduleLogic();
+//		ScheduleDAO dao = new ScheduleDAO();
+//		ScheduleLogic logic = new ScheduleLogic();
 
 		String forwardPath = "/WEB-INF/jsp/in_fail.jsp";
 		boolean result;
 
-		/**
+		/*
 		 * inputに格納されている値により、遷移先を変更
 		 * s_inputの場合、スケジュールの登録完了画面
 		 * s_editの場合、スケジュール編集完了画面
@@ -126,13 +154,15 @@ public class Schedule extends HttpServlet {
 		switch (input) {
 		case "s_input":
 			//スケジュールインスタンスの生成
-			ScheduleBeans SB = parameter.execute(request, user);
+			//ScheduleBeans
+			SB = parameter.execute(request, user);
 			result = logic.execute01(SB);
 
 			if (result) {
 				//パスワードの暗号化
 				SB = logic.setS_Id(SB);
-				application.setAttribute("SB", SB);
+		//		application.setAttribute("SB", SB);
+				session.setAttribute("SB", SB);
 				forwardPath = "/WEB-INF/jsp/input_success.jsp";
 			} else {
 			}
@@ -140,7 +170,8 @@ public class Schedule extends HttpServlet {
 
 		case "s_edit":
 			//該当するスケジュールインスタンスを取得し、変更を実行
-			ScheduleBeans s = (ScheduleBeans) session.getAttribute("SB_e");
+			//ScheduleBeans s = (ScheduleBeans) session.getAttribute("SB_e");
+			s = (ScheduleBeans) session.getAttribute("SB_e");
 			s = parameter.execute(request, s);
 			result = logic.execute03(s);
 			if (result) {
@@ -152,8 +183,9 @@ public class Schedule extends HttpServlet {
 
 		case "s_delete":
 			//該当するスケジュールインスタンスを取得し、削除を実行
-			ScheduleBeans Sd = (ScheduleBeans) session.getAttribute("SB_d");
+		//	ScheduleBeans Sd = (ScheduleBeans) session.getAttribute("SB_d");
 
+			Sd = (ScheduleBeans) session.getAttribute("SB_d");
 			result = logic.delete(Sd);
 			if (result) {
 				forwardPath = "/WEB-INF/jsp/deleteSucess.jsp";

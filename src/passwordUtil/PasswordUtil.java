@@ -17,6 +17,7 @@ public class PasswordUtil {
 			sha = String.format("%040x", new BigInteger(1, result));
 		} catch (Exception e) {
 			e.printStackTrace();
+
 		}
 		return sha;
 	}
