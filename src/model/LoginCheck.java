@@ -10,13 +10,30 @@ import passwordUtil.PasswordUtil;
 
 public class LoginCheck {
 
+	private UserDAO userdao;
+	private User user;
+	private PasswordUtil passwordUtil;
+	private Pass pass;
+
+	public LoginCheck() {
+		super();
+		userdao = new UserDAO();
+		user = new User();
+		passwordUtil = new PasswordUtil();
+		pass = new Pass();
+	}
+
 	/**
 	 *ユーザーテーブルから全データを取得
 	 * @return
 	 */
 	public List<User> execute() {
-		UserDAO dao = new UserDAO();
+	/*	UserDAO dao = new UserDAO();
 		List<User> user = dao.findAll();
+		return user;
+
+	*/
+		List<User> user = userdao.findAll();
 		return user;
 	}
 
@@ -30,8 +47,12 @@ public class LoginCheck {
 
 	public int execute(User user, String new_pass, String old_pass) {
 		String password;
-		PasswordUtil passwordUtil = new PasswordUtil();
+	/*	PasswordUtil passwordUtil = new PasswordUtil();
 		UserDAO userdao = new UserDAO();
+*/
+
+	//	passwordUtil = new PasswordUtil();
+	//	userdao = new UserDAO();
 
 		//パスワードの暗号化
 		try {
@@ -53,8 +74,8 @@ public class LoginCheck {
 		if (old_pass.equals(people.get(user.getId()-1).getPassword())) {
 			user.setPassword(new_pass);
 
-			System.out.println(old_pass);
-			System.out.println(people.get(user.getId()).getPassword());
+	//		System.out.println(old_pass);
+	//		System.out.println(people.get(user.getId()).getPassword());
 			return Pass.PASSWORD_OK;
 
 

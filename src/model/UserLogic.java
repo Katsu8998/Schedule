@@ -6,6 +6,18 @@ import commonPass.Register;
 import dao.UserDAO;
 
 public class UserLogic {
+	private UserLogic UL;
+	private User UN;
+	private UserDAO dao;
+
+	public UserLogic() {
+		super();
+		this.UN = new User();
+		this.dao = new UserDAO();
+
+	}
+
+
 	/**
 	 * Login画面にて、入力されたIDとパスワードがユーザーテーブルにあるデータを一致するか確認
 	 * @param user
@@ -15,7 +27,8 @@ public class UserLogic {
 	 */
 	public User selectUser(List<User> user, int id, String password) {
 
-		 User UN = new User();
+//		 User UN = new User();
+		UN = new User();
 
 		 for(User u : user) {
 			 if(u.getId()==id) {
@@ -36,7 +49,7 @@ public class UserLogic {
 	 */
 
 	public int register(User user) {
-		UserDAO dao = new UserDAO();
+	//	UserDAO dao = new UserDAO();
 		int result = dao.register(user);
 
 		if(result == 0) {

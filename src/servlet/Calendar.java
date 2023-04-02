@@ -22,6 +22,16 @@ import model.CalendarLogic;
 public class Calendar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private CalendarLogic calendarLogic;
+
+	private CalendarBeans beans;
+
+	public Calendar() {
+		super();
+		this.calendarLogic = new CalendarLogic();
+		this.beans = new CalendarBeans();
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -29,8 +39,11 @@ public class Calendar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
-		CalendarLogic calendarLogic = new CalendarLogic();
-		CalendarBeans beans = null;
+	//	CalendarLogic calendarLogic = new CalendarLogic();
+	//	CalendarBeans beans = null;
+
+		calendarLogic = new CalendarLogic();
+		beans = null;
 
 
 

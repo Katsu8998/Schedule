@@ -17,6 +17,20 @@ public class ScheduleDAO {
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
 
+	private String sql_insert = "INSERT INTO SCHEDULE (ID, \"DAY\", START, FINISH, TITLE, DETAIL,SCHEDULE_ID) VALUES (?,?,?,?,?,?,?)";
+	private String sql_select = "SELECT * FROM SCHEDULE ORDER BY id DESC";
+
+
+
+	private ScheduleBeans sb;
+	private PasswordUtil pu;
+
+	public ScheduleDAO() {
+		super();
+		this.sb = new ScheduleBeans();
+		this.pu = new PasswordUtil();
+	}
+
 	/**
 	 * スケジュールを生成
 	 * @param SB
@@ -25,9 +39,9 @@ public class ScheduleDAO {
 
 	public boolean create(ScheduleBeans SB) {
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			String sql = "INSERT INTO SCHEDULE (ID, \"DAY\", START, FINISH, TITLE, DETAIL,SCHEDULE_ID) VALUES (?,?,?,?,?,?,?)";
+		//	String sql = "INSERT INTO SCHEDULE (ID, \"DAY\", START, FINISH, TITLE, DETAIL,SCHEDULE_ID) VALUES (?,?,?,?,?,?,?)";
 
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			PreparedStatement pStmt = conn.prepareStatement(sql_insert);
 
 			pStmt.setInt(1, SB.getId());
 			pStmt.setDate(2, SB.getDate());
@@ -39,9 +53,8 @@ public class ScheduleDAO {
 			String u_id = String.valueOf(SB.getId());
 			String s_id = u_id + SB.getStart() + SB.getEnd();
 
-			PasswordUtil pu = new PasswordUtil();
+		//	PasswordUtil pu = new PasswordUtil();
 			s_id = pu.execute02(s_id);
-			System.out.println(s_id);
 
 			pStmt.setString(7, s_id);
 
@@ -64,8 +77,8 @@ public class ScheduleDAO {
 		List<ScheduleBeans> SB = new ArrayList<>();
 
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			String sql = "SELECT * FROM SCHEDULE ORDER BY id DESC";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+		//	String sql = "SELECT * FROM SCHEDULE ORDER BY id DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql_select);
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
@@ -76,7 +89,8 @@ public class ScheduleDAO {
 				String detail = rs.getString("DETAIL");
 				String schedule_id = rs.getString("SCHEDULE_ID");
 
-				ScheduleBeans sb = new ScheduleBeans(id, day, start, finish, title, detail, schedule_id);
+			//	ScheduleBeans sb = new ScheduleBeans(id, day, start, finish, title, detail, schedule_id);
+				 sb = new ScheduleBeans(id, day, start, finish, title, detail, schedule_id);
 				SB.add(sb);
 			}
 		} catch (SQLException e) {
@@ -98,17 +112,22 @@ public class ScheduleDAO {
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			conn.setAutoCommit(false);
 
-			String sql = "UPDATE SCHEDULE SET \"DAY\" = ?, START = ?, FINISH = ?, TITLE = ?, DETAIL = ? WHERE SCHEDULE_ID ="
+			String sql_edit = "UPDATE SCHEDULE SET \"DAY\" = ?, START = ?, FINISH = ?, TITLE = ?, DETAIL = ? WHERE SCHEDULE_ID ="
 					+ "\'" + SB.getSchedule_id() + "\'";
+
+
+		//	String sql_edit =
 			int result = 0;
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			PreparedStatement pStmt = conn.prepareStatement(sql_edit);
 
 			pStmt.setDate(1, SB.getDate());
 			pStmt.setString(2, SB.getStart());
 			pStmt.setString(3, SB.getEnd());
 			pStmt.setString(4, SB.getTitle());
 			pStmt.setString(5, SB.getDetail());
-			//	pStmt.setString(6,SB.getSchedule_id());
+		//	pStmt.setString(6, "'" + SB.getSchedule_id() + "'");
+
+		//	pStmt.setString(6,SB.getSchedule_id());
 
 			result = pStmt.executeUpdate();
 			if (result != 1) {
@@ -133,7 +152,7 @@ public class ScheduleDAO {
 	 */
 
 	public ScheduleBeans finds(String s_id) {
-		ScheduleBeans sb = new ScheduleBeans();
+	//	ScheduleBeans sb = new ScheduleBeans();
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			String sql = "SELECT * FROM SCHEDULE where SCHEDULE_ID =" + "\'" + s_id + "\'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);

@@ -23,6 +23,23 @@ import model.UserLogic;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private CalendarLogic beansLogic;
+	private CalendarBeans beans;
+	private CalendarBeans now;
+	private UserDAO uDao;
+	private User UN;
+	private UserLogic userLogic;
+
+	public Login() {
+		super();
+		this.beansLogic = new CalendarLogic();
+		this.beans = new CalendarBeans();
+		this.now = new CalendarBeans();
+		this.uDao = new UserDAO();
+		this.UN = new User();
+		this.userLogic = new UserLogic();
+
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -75,11 +92,11 @@ public class Login extends HttpServlet {
 
 
 		//ログイン時の日付けでカレンダーを取得
-		CalendarLogic beansLogic = new CalendarLogic();
-		CalendarBeans beans = new CalendarBeans();
+	//	CalendarLogic beansLogic = new CalendarLogic();
+	//	CalendarBeans beans = new CalendarBeans();
 		beans = beansLogic.execute2();
 
-		CalendarBeans now = new CalendarBeans();
+	//	CalendarBeans now = new CalendarBeans();
 		now = beansLogic.execute(beans.getYear(), beans.getMonth());
 
 		//入力されたIDとパスワードを取得
@@ -87,7 +104,7 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 
 		//データベースからIDとパスワードを取得
-		UserDAO uDao = new UserDAO();
+//		UserDAO uDao = new UserDAO();
 		List<User> user = uDao.findAll();
 
 		/**
@@ -96,10 +113,10 @@ public class Login extends HttpServlet {
 		 */
 
 
-		User UN = new User();
+	//	User UN = new User();
 		boolean flg = false;
 		flg = user.stream().anyMatch(u -> u.getId() == id && u.getPassword().equals(password));
-		UserLogic userLogic = new UserLogic();
+//		UserLogic userLogic = new UserLogic();
 		if( flg) {
 			UN = userLogic.selectUser(user, id, password);
 			session.setAttribute("user", UN);

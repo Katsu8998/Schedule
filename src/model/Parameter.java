@@ -5,6 +5,14 @@ import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 
 public class Parameter {
+	//private User user;
+	private ScheduleBeans SB;
+
+	public Parameter() {
+		super();
+//		this.user = new User();
+		this.SB = new ScheduleBeans();
+	}
 
 	/**
 	 * 新規登録用
@@ -31,8 +39,8 @@ public class Parameter {
 		String u_id = String.valueOf(id);
 		String s_id = u_id + start + finish;
 
-
-		ScheduleBeans SB = new ScheduleBeans(id, sqlDay, start, finish, title, memo);
+		SB = new ScheduleBeans(id, sqlDay, start, finish, title, memo);
+		//ScheduleBeans SB = new ScheduleBeans(id, sqlDay, start, finish, title, memo);
 		return SB;
 
 	}

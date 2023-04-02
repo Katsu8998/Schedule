@@ -14,13 +14,24 @@ import passwordUtil.PasswordUtil;
  *
  */
 public class ScheduleLogic {
+	private ScheduleDAO dao;
+	private ScheduleBeans SB2;
+	private PasswordUtil pu;
+
+	public ScheduleLogic() {
+		super();
+		this.dao = new ScheduleDAO();
+		this.SB2 = new ScheduleBeans();
+		this.pu = new PasswordUtil();
+	}
+
 	/**
 	 * 新規登録
 	 * @param SB
 	 * @return
 	 */
 	public boolean execute01(ScheduleBeans SB) {
-		ScheduleDAO dao = new ScheduleDAO();
+//		ScheduleDAO dao = new ScheduleDAO();
 		return dao.create(SB);
 	}
 
@@ -30,10 +41,8 @@ public class ScheduleLogic {
 	 */
 
 	public List<ScheduleBeans> execute02() {
-		ScheduleDAO dao = new ScheduleDAO();
+//		ScheduleDAO dao = new ScheduleDAO();
 		List<ScheduleBeans> SB = dao.findAll();
-
-
 
 		return SB;
 	}
@@ -46,7 +55,7 @@ public class ScheduleLogic {
 	 * @return
 	 */
 	public boolean  execute03(ScheduleBeans SB) {
-		ScheduleDAO dao = new ScheduleDAO();
+//		ScheduleDAO dao = new ScheduleDAO();
 		return dao.edit(SB);
 
 	}
@@ -58,10 +67,10 @@ public class ScheduleLogic {
 	 */
 
 	public ScheduleBeans setS_Id(ScheduleBeans SB) {
-		ScheduleBeans SB2 = new ScheduleBeans();
+//		ScheduleBeans SB2 = new ScheduleBeans();
 		String u_id = String.valueOf(SB.getId());
 		String s_id = u_id + SB.getStart() + SB.getEnd();
-		PasswordUtil pu = new PasswordUtil();
+//	PasswordUtil pu = new PasswordUtil();
 		s_id = pu.execute02(s_id);
 		SB2.setSchedule_id(s_id);
 
@@ -75,10 +84,13 @@ public class ScheduleLogic {
 	 * @return
 	 */
 	public ScheduleBeans selectS(String s_id) {
-		ScheduleDAO dao = new ScheduleDAO();
-		ScheduleBeans s2 = new ScheduleBeans();
-		s2 = dao.finds(s_id);
-		return s2;
+//		ScheduleDAO dao = new ScheduleDAO();
+//		ScheduleBeans s2 = new ScheduleBeans();
+//		s2 = dao.finds(s_id);
+
+		SB2 = dao.finds(s_id);
+		return SB2;
+		//		return s2;
 
 		 }
 
@@ -89,7 +101,7 @@ public class ScheduleLogic {
 	 */
 
 	public boolean delete(ScheduleBeans Sd) {
-		ScheduleDAO dao = new ScheduleDAO();
+//		ScheduleDAO dao = new ScheduleDAO();
 		return dao.deleteFunc(Sd);
 
 		 }
@@ -102,6 +114,7 @@ public class ScheduleLogic {
 		List<ScheduleBeans>SB_True = new ArrayList<>();
 		for (ScheduleBeans s : SB) {
 			date = s.getDate();
+
 
 			Calendar c = Calendar.getInstance();
 			c.setTime(date);

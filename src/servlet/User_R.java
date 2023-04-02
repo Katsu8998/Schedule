@@ -20,7 +20,16 @@ import model.UserLogic;
 @WebServlet("/User_R")
 public class User_R extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Parameter parameter;
+	private User user;
+	private UserLogic logic;
 
+	public User_R() {
+		super();
+		this.parameter = new Parameter();
+		this.user = new User();
+		this.logic = new UserLogic();
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,9 +38,10 @@ public class User_R extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//sessionスコープインスタンスの取得
 		HttpSession session = request.getSession();
-		Parameter parameter = new Parameter();
-		User user = parameter.register(request);
-		UserLogic logic = new UserLogic();
+	//	Parameter parameter = new Parameter();
+	//	User user = parameter.register(request);
+		user = parameter.register(request);
+	//	UserLogic logic = new UserLogic();
 		int result = logic.register(user);
 
 		String forwardPath = "/WEB-INF/jsp/register_fail.jsp";

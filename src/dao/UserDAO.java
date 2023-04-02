@@ -16,6 +16,18 @@ public class UserDAO {
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
 
+	private UserDAO dao;
+	private User user;
+
+	private String sql_select = "SELECT * FROM \"USER\" ORDER BY id DESC";
+	private String sql_change = "UPDATE \"USER\" set PASSWORD= ? WHERE ID=?";
+	private String sql_register  = "INSERT INTO \"USER\" (ID, NAME, PASSWORD) VALUES(?,?,?)";
+
+	public UserDAO() {
+		super();
+		this.user = new User();
+	}
+
 	/**
 	 * 	USERテーブルから全データを取得
 	 * @return
@@ -24,8 +36,8 @@ public class UserDAO {
 		List<User>user = new ArrayList<>();
 
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			String sql = "SELECT * FROM \"USER\" ORDER BY id DESC";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+		//	String sql = "SELECT * FROM \"USER\" ORDER BY id DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql_select);
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
@@ -51,8 +63,9 @@ public class UserDAO {
 
 	public boolean changePass(User user, String new_pass) {
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			String sql = "UPDATE \"USER\" set PASSWORD= ? WHERE ID=?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//String sql = "UPDATE \"USER\" set PASSWORD= ? WHERE ID=?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql_change);
 			pStmt.setString(1,user.getPassword());
 			pStmt.setInt(2, user.getId());
 			int result = pStmt.executeUpdate();
@@ -74,8 +87,8 @@ public class UserDAO {
 
 	public int register(User user) {
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			String sql = "INSERT INTO \"USER\" (ID, NAME, PASSWORD) VALUES(?,?,?)";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+		//	String sql = "INSERT INTO \"USER\" (ID, NAME, PASSWORD) VALUES(?,?,?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql_register);
 			pStmt.setInt(1, user.getId());
 			pStmt.setString(2, user.getName());
 			pStmt.setString(3, user.getPassword());

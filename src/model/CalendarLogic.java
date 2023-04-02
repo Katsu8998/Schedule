@@ -8,8 +8,10 @@ public class CalendarLogic {
 	//対応するために可変長引数にしている。
 	public CalendarBeans execute(int... args) {
 
-		CalendarBeans beans = new CalendarBeans();
-		Calendar c = Calendar.getInstance();
+	 CalendarBeans beans = new CalendarBeans();
+	  Calendar c = Calendar.getInstance();
+
+
 
 
 		if (args.length == 2) {

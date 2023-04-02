@@ -17,17 +17,33 @@ public class SearchDAO {
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
 
+	private String sql_select = "SELECT * FROM \"USER\" INNER JOIN SCHEDULE ON \"USER\".ID = SCHEDULE.ID WHERE \"USER\".ID = ?";
+	private String sql_select2 = "SELECT * FROM \"USER\" WHERE \"USER\".ID = ?";
+
 	/**
 	 * 該当Userのスケジュールと名前をスケジュールテーブル及びユーザーテーブルから取得
 	 *
 	 * @return
 	 */
+
+	private SearchBeans Sr;
+	private User user;
+
+	public SearchDAO() {
+		super();
+		this.Sr = new SearchBeans();
+		this.user = new User();
+	}
+
+
+
+
 	public List<SearchBeans> find(int id) {
 		List<SearchBeans> SrB = new ArrayList<>();
 
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			String sql = "SELECT * FROM \"USER\" INNER JOIN SCHEDULE ON \"USER\".ID = SCHEDULE.ID WHERE \"USER\".ID = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+		//	String sql = "SELECT * FROM \"USER\" INNER JOIN SCHEDULE ON \"USER\".ID = SCHEDULE.ID WHERE \"USER\".ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql_select);
 			pStmt.setInt(1, id);
 
 			ResultSet rs = pStmt.executeQuery();
@@ -43,7 +59,10 @@ public class SearchDAO {
 				String detail = rs.getString("DETAIL");
 				String schedule_id = rs.getString("SCHEDULE_ID");
 
-				SearchBeans Sr = new SearchBeans(user_id, name, day, start, finish, title, detail);
+			//	SearchBeans Sr = new SearchBeans(user_id, name, day, start, finish, title, detail);
+				 Sr = new SearchBeans(user_id, name, day, start, finish, title, detail);
+
+
 				SrB.add(Sr);
 			}
 		} catch (SQLException e) {
@@ -62,10 +81,11 @@ public class SearchDAO {
 	 */
 
 	public User finds(int id) {
-		User user = new User();
+	//	User user = new User();
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			String sql = "SELECT * FROM \"USER\" WHERE \"USER\".ID = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+		//	String sql = "SELECT * FROM \"USER\" WHERE \"USER\".ID = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql_select2);
 			pStmt.setInt(1, id);
 
 			ResultSet rs = pStmt.executeQuery();

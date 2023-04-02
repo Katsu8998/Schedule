@@ -21,6 +21,18 @@ import model.User;
 public class ChangePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private User user;
+	private LoginCheck loginCheck;
+	private UserDAO dao;
+
+	public ChangePassword() {
+		super();
+		this.loginCheck = new LoginCheck();
+		this.user = new User();
+
+		this.dao = new UserDAO();
+	}
+
 //パスワード更新時に稼働
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,18 +41,14 @@ public class ChangePassword extends HttpServlet {
 			throws ServletException, IOException {
 		String forwardPath = "/WEB-INF/jsp/changePass.jsp";
 		String pass = request.getParameter("password");
-		System.out.println("---");
-		System.out.println(pass);
 
 		String new_pass = request.getParameter("new_pass");
-		System.out.println(new_pass);
-		System.out.println("----");
-
 
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		LoginCheck loginCheck = new LoginCheck();
-		UserDAO dao = new UserDAO();
+	//	User
+		user = (User) session.getAttribute("user");
+	//	LoginCheck loginCheck = new LoginCheck();
+	//	UserDAO dao = new UserDAO();
 
 		int result = loginCheck.execute(user, new_pass, pass);
 

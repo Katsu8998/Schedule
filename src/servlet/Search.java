@@ -21,13 +21,22 @@ import model.User;
 public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private SearchLogic logic;
+	private User user;
+
+	public Search() {
+		super();
+		this.logic  = new SearchLogic();
+		this.user = new User();
+	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		SearchLogic logic = new SearchLogic();
+	//	SearchLogic logic = new SearchLogic();
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		//ユーザーテーブルとスケジュールテーブルの内部結合により得たデータをリストに格納
@@ -37,7 +46,8 @@ public class Search extends HttpServlet {
 		//リストのサイズが0もしくはnullの場合、ユーザーテーブーブルから該当ユーザーの全情報を取得
 
 		if(SrB.size()==0 || SrB==null) {
-			User user = logic.execute02(id);
+	//		User user = logic.execute02(id);
+			 user = logic.execute02(id);
 			request.setAttribute("user", user);
 		}
 
