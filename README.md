@@ -28,23 +28,23 @@ Eclipse, Tomcat, JUnit5, H2DB
 ## イメージ図
 <img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/a82b7071-2001-4115-9b73-f0b5a40e5ccb">
 
-<img width="880" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/67b4c878-9631-4142-b009-0cf0e6212d09">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/67b4c878-9631-4142-b009-0cf0e6212d09">
 
-<img width="960" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/8a86105c-7d49-47ed-a71f-0db6ec326bb8">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/8a86105c-7d49-47ed-a71f-0db6ec326bb8">
 
-<img width="955" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/19edb439-b9c1-4508-8e4a-1c59010fa684">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/19edb439-b9c1-4508-8e4a-1c59010fa684">
 
-<img width="959" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/96d5efea-ea66-4dcb-a187-f54d4fbc396e">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/96d5efea-ea66-4dcb-a187-f54d4fbc396e">
 
-<img width="960" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/a21cd92c-d7dd-4a25-ac47-8e5a90dadeb7">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/a21cd92c-d7dd-4a25-ac47-8e5a90dadeb7">
 
-<img width="960" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/b0eb8bbc-fa65-4bcd-ba46-fb572163cb4a">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/b0eb8bbc-fa65-4bcd-ba46-fb572163cb4a">
 
-<img width="960" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/7adeddd6-c779-4f9e-b6a5-465aa6bdcf86">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/7adeddd6-c779-4f9e-b6a5-465aa6bdcf86">
 
-<img width="955" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/8ec8a8fd-cfe9-4aeb-a7f3-62540a9c925d">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/8ec8a8fd-cfe9-4aeb-a7f3-62540a9c925d">
 
-<img width="960" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/cef76b1b-234a-4e11-8266-9339019760b8">
+<img width="958" alt="image" src="https://github.com/Katsu8998/Schedule/assets/114673266/cef76b1b-234a-4e11-8266-9339019760b8">
 
 
 
